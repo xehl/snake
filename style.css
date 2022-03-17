@@ -1,0 +1,25 @@
+body {
+    text-align: center;
+}
+
+#grid {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5% auto;
+    border: 1px solid black;
+    width: 50vh;
+    height: 50vh;
+}
+
+.box {
+    width: 5%;
+    height: 5%;
+}
+
+.snake {
+    background-color: green;
+}
+
+.food {
+    background-color: blue;
+}
