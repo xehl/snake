@@ -5,12 +5,16 @@ let foodPosition;
 let snakeArray = [104];
 let direction = "right";
 let moving;
+let speed = 80;
+
+
 
 // starts the snake moving when space bar is pressed
 document.addEventListener("keydown", function startSnake(e) {
     if(e.keyCode == 32){
-        moving = setInterval(moveSnake, 80);
+        moving = setInterval(moveSnake, speed);
         document.removeEventListener("keydown", startSnake);
+        addArrows();
     }
 })
 
@@ -25,20 +29,23 @@ let divs = grid.childNodes;
 divs[snakeArray[0]].classList.add("snake");
 
 // add arrow key controls
-document.addEventListener("keydown", (e) => {
-    if (e.keyCode === 37 && direction !== "right")
-        direction = "left"
-    if (e.keyCode === 38 && direction !== "down")
-        direction = "up";
-    if (e.keyCode === 39 && direction !== "left")
-        direction = "right";
-    if (e.keyCode === 40 && direction !== "up")
-        direction = "down";
-});
+function addArrows() {
+    document.addEventListener("keydown", function changeDirection(e) {
+        if (e.keyCode === 37 && direction !== "right")
+            direction = "left"
+        if (e.keyCode === 38 && direction !== "down")
+            direction = "up";
+        if (e.keyCode === 39 && direction !== "left")
+            direction = "right";
+        if (e.keyCode === 40 && direction !== "up")
+            direction = "down";
+        document.removeEventListener("keydown", changeDirection);
+    });
+}
 
 // checks if head has bumped into the snake or the boundary
 function bump(head) {
-    
+
     if (head > 399 && direction === "down") {
         console.log("out of bounds / bottom");
         clearInterval(moving);
@@ -53,25 +60,31 @@ function bump(head) {
 
     if (head % 20 === 0 && direction === "right") {
         console.log("out of bounds / right side");
-        divs[head].classList.remove("snake");
         clearInterval(moving);
         return true;
     }
 
     if (head % 20 === 19 && direction === "left") {
         console.log("out of bounds / left side");
-        divs[head].classList.remove("snake");
         clearInterval(moving);
         return true;
     }
-    
+
+    if (head < 0 && direction === "left") {
+        console.log("out of bounds");
+        clearInterval(moving);
+        return true;
+    }
+
     if (head >= 0 && head < 400) {
         if (divs[head].classList.contains("snake")) {
+            // don't count if direction === left and on the same line
             console.log("hit");
             clearInterval(moving);
             return true;
         }
     }
+    return false;
 }
 
 // move snake head
@@ -93,11 +106,7 @@ function moveSnake() {
         headPosition--;
     }
 
-    let bumped = bump(headPosition);
-
-    // build the snake, passing in new head position
-    if (bumped !== false)
-        buildSnake(headPosition);
+    buildSnake(headPosition);
 
     // eat the food if head reaches food position (maybe move this in front of the buildSnake function)
     if (headPosition === foodPosition) {
@@ -110,21 +119,26 @@ function moveSnake() {
 
 function buildSnake(headPosition) {
 
-    // add class to the new head of the snake
-    divs[headPosition].classList.add("snake");
+    // checks first if snake has bumped into an obstacle
+    if (bump(headPosition) === false) {
 
-    // puts the headPosition at the front of the snake
-    snakeArray.unshift(headPosition);
+        // add class to the new head of the snake
+        divs[headPosition].classList.add("snake");
 
-    // assigns index and pops off the last index in the snakearray
-    let last = snakeArray.pop();
+        // puts the headPosition at the front of the snake
+        snakeArray.unshift(headPosition);
 
-    // removes the snake class from the last div on the tail
-    divs[last].classList.remove("snake");
+        // assigns index and pops off the last index in the snakearray
+        let last = snakeArray.pop();
 
+        // removes the snake class from the last div on the tail
+        divs[last].classList.remove("snake");
+
+    }
+    addArrows();
 }
 
-// eatfood, add 2 to snake length
+// eatfood, add to snake length
 
 function eatFood() {
     divs[foodPosition].classList.remove("food");
@@ -133,6 +147,7 @@ function eatFood() {
     // updates score div
     document.querySelector("#score").innerHTML = `Score ${snakeArray.length}`;
 
+    // adds to the back of the snake
     snakeArray.push(snakeArray[snakeArray.length - 1]);
 
 }
