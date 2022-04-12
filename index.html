@@ -1,20 +1,38 @@
 <!DOCTYPE html>
-    <head>
-        <title>Snake</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-    </head>
 
-    <body>
-        <h1>Snake</h1>
+<head>
+  <title>Snake</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
 
-        <div id="grid"></div>
+<body>
+  <img id="title" src="title.png">
+  <div id="container">
+    <div>
+      <div id="instructions">You know what to do. Use the arrow keys to change the snake's direction. Select a difficulty level, then press space to begin.</div>
+      <div id="difficulty">
+        <button class="btn btn-design" id="easy">Easy</button>
+        <button class="btn btn-design" id="medium">Medium</button>
+        <button class="btn btn-design" id="hard">Hard</button>
+        <button class="btn btn-design" id="insane">Insane</button>
+      </div>
+    </div>
+    
+    <div id="grid"></div>
 
-        <div id="score">Score: 0</div>
+    <div id="right">
+      <div id="score">Score: 0</div>
+      <button class="btn btn-design" id="replay">New Game</button>
+    </div>
 
-        <button id="replay">New Game</button>
 
-        <script src="script.js"></script>
-    </body>
+  </div>
+
+  <script src="script.js"></script>
+</body>
 
 </html>

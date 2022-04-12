@@ -1,40 +1,105 @@
 body {
-    text-align: center;
-    background-image: url("stars.jpeg");
-    font-family: Helvetica;
-    color: white;
-    background-repeat: no-repeat;
-    background-size: auto;
+  text-align: center;
+  background-image: url("stars.jpeg");
+  font-family: Helvetica;
+  color: white;
+  background-repeat: no-repeat;
+  background-size: auto;
+  font-family: "Share Tech Mono", monospace;
+}
+
+#instructions {
+  width: 70%;
+  margin: 0 auto;
+  margin-bottom: 15px;
+}
+
+#container {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 #grid {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 5% auto;
-    border: 1px solid white;
-    width: 50vh;
-    height: 50vh;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+  border: 1px solid white;
+  width: 70vh;
+  height: 70vh;
 }
 
 .box {
-    width: 5%;
-    height: 5%;
-    background-color: black;
-    z-index: 0;
+  width: 5%;
+  height: 5%;
+  background-color: black;
+  z-index: 0;
 }
 
 .snake {
-    background-color: #5ff536;
-    box-shadow: 0px 0px 20px #DCFC50;
-    z-index: 2;
+  background-color: #58e983;
+  box-shadow: 0px 0px 20px #62ff93;
+  z-index: 2;
 }
 
 .food {
-    background-color: #38fcff;
-    box-shadow: 0px 0px 40px #b8feff;
-    z-index: 2;
+  background-color: #f0573c;
+  box-shadow: 0px 0px 40px #d2ff08;
+  z-index: 3;
 }
 
-.start {
-    
+.temp {
+  background-color: #3cf0d8;
+}
+
+#right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#replay {
+  margin-top: 100px;
+}
+
+#score {
+  font-size: 40px;
+}
+
+#title {
+  margin-top: 20px;
+}
+
+.btn {
+  font-family: "Share Tech Mono", monospace;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  display: block;
+  width: 200px;
+  font-size: 15px;
+  outline: none !important;
+}
+
+#difficulty {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-design {
+  margin: 16px auto;
+  letter-spacing: 2px;
+  padding: 16px;
+  color: rgb(25, 27, 24) !important;
+  background: #58e983;
+  transition: box-shadow 0.1s ease-in-out;
+}
+.btn-design:hover {
+  box-shadow: 0 0 15px 0px #38ad5b;
+  transition: box-shadow 0.1s ease-in-out;
+}
+
+.selected {
+  background: #246939;
 }
